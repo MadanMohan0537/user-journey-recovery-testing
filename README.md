@@ -354,7 +354,25 @@ Contributions should include tests, documentation, and a reproducible example wh
 - Redact adapter metadata before persisting evidence.
 - Treat suggested fixes as reviewable tickets, never automatic production changes.
 
-See [SECURITY.md](SECURITY.md) for reporting and deployment guidance.
+See [SECURITY.md](SECURITY.md) for reporting guidance.
+
+## Deployment
+
+Cloudflare Workers is the planned deployment target. It is not configured yet, and this repository is not deployed. There is no `wrangler.toml`, no Worker entry point, and no live `workers.dev` URL.
+
+Once that config exists, publish the Worker named in it with:
+
+```bash
+npx wrangler deploy
+```
+
+Do not deploy by package version, git tag, or release number, and do not use `wrangler versions upload`, `wrangler versions deploy`, or a percentage rollout.
+
+Before `npx wrangler deploy` can work, this repo needs:
+
+- a `wrangler.toml` with the Worker name and compatibility settings;
+- a Worker entry point. The code here is TypeScript, so that entry is a JavaScript or TypeScript Worker module;
+- if Python is added later, either Python Workers or a JavaScript/TypeScript port of that code. There is no Python in this repository today.
 
 ## Project status
 
